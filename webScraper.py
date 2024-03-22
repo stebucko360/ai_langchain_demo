@@ -13,7 +13,7 @@ llm = Ollama(model="llama2")
 embeddings = OllamaEmbeddings()
 output_parser = StrOutputParser()
 ## web based loader to scrape web page
-loader = WebBaseLoader("https://en.wikipedia.org/wiki/Mafia_(video_game)")
+loader = WebBaseLoader("https://www.bbc.co.uk/news/articles/c106ml30p5lo")
 ##loads the given doc
 docs = loader.load()
 ## Build index for vector store from ingested document
@@ -38,7 +38,7 @@ retrieval_chain = create_retrieval_chain(retriever, document_chain)
 
 chain = prompt | llm | output_parser
 
-response = retrieval_chain.invoke({"input": "Tell me how the game ends"})
+response = retrieval_chain.invoke({"input": "Summarise this news article for me into on sentence"})
 print(response["answer"])
 
 # message = chain.invoke({"input": "So llama2 is just considered a package and is installed globally?"})
